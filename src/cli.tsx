@@ -1,4 +1,4 @@
-import { createJson2SvgCLI } from "kaavio/es5/createJson2SvgCLI";
+import { createJson2SvgCLI } from "eweitz-kaavio/es5/createJson2SvgCLI";
 
 const path = require("path");
 const npmPackage = require("../package.json");

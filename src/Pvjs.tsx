@@ -16,7 +16,7 @@ import * as ReactDOM from "react-dom";
 // TODO look at how to properly import this so it works
 // for both es5, esnext, tree-shaking, etc.
 //import { Kaavio } from "kaavio";
-import { Kaavio } from "kaavio/esnext/Kaavio";
+import { Kaavio } from "eweitz-kaavio/esnext/Kaavio";
 
 // The edge drawing definitions are in Kaavio because they can be generically used.
 // But the icons and markers are specific to Pvjs (less likely to useful to other applications).
@@ -265,7 +265,7 @@ export class Pvjs extends React.Component<any, any> {
             });
             return subAcc;
           });
-		return 
+		return
         },
         {}
       );

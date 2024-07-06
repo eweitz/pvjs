@@ -10,7 +10,7 @@ import {
   ElbowLine,
   SegmentedLine,
   StraightLine
-} from "kaavio/es5/drawers/edges/index";
+} from "eweitz-kaavio/es5/drawers/edges/index";
 
 // Returns the dot product of the given four-element vectors.
 function d3_svg_lineDot4(a, b) {
