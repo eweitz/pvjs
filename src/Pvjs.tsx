@@ -22,10 +22,209 @@ import { Kaavio } from "eweitz-kaavio/esnext/Kaavio";
 // But the icons and markers are specific to Pvjs (less likely to useful to other applications).
 import * as themePlain from "./themes/plain/theme";
 import * as themeDark from "./themes/dark/theme";
-// TODO make the CLI bundler include the styles
-const ContainerCustomStyle = require("./themes/styles/Container.css");
-const DiagramCustomStylePlain = require("./themes/styles/Diagram.plain.css");
-const DiagramCustomStyleDark = require("./themes/styles/Diagram.dark.css");
+// // TODO make the CLI bundler include the styles
+// const ContainerCustomStyle = require("./themes/styles/Container.css");
+// const DiagramCustomStylePlain = require("./themes/styles/Diagram.plain.css");
+// const DiagramCustomStyleDark = require("./themes/styles/Diagram.dark.css");
+const ContainerCustomStyle = `
+.Container {
+  background-color: white;
+}`;
+
+const DiagramCustomStylePlain = `
+/* Hide the top-level citation numbers */
+.Viewport > .Citation > .Text {
+  font-size: 0px;
+}
+
+/* Hide the InfoBox */
+.Viewport > .Text {
+  font-size: 0;
+}
+
+/* TODO: having a thin stroke might help with contrast for
+ * certain foreground/background combos. Should we use a
+ * stroke of 0.05px and maybe apply an invert filter? */
+.Text {
+  stroke: none;
+}
+
+.DataNode {
+  stroke-miterlimit: 1;
+}
+
+.DataNode:hover {
+  cursor: pointer;
+}
+
+.DataNode .Highlighted {
+  opacity: 0.6;
+  stroke-width: 0px;
+}
+
+.Citation .Icon {
+  fill: none;
+  stroke-width: 0px;
+}
+
+.Citation .Text {
+  text-align: center;
+  vertical-align: top;
+  font-size: 7px;
+  fill: #999999;
+  fill-opacity: 1;
+  stroke: none;
+}`;
+
+const DiagramCustomStyleDark = `
+.Viewport > .Icon {
+  filter: url(#Invert95);
+}
+
+/* Hide the InfoBox */
+.Viewport > .Text {
+  font-size: 0;
+}
+
+.Edge > path {
+  stroke-width: 1.1px;
+}
+
+.Viewport .DataNode,
+.Group .DataNode,
+.Viewport .Group .Icon {
+  /*
+  filter: url(#Invert95);
+*/
+  /*stroke-miterlimit: 1;*/
+  /*filter: drop-shadow( 5px 5px 5px red );*/
+  /*filter: drop-shadow(16px 16px 20px black);*/
+  /* Same syntax as box-shadow */
+  /*
+  filter: drop-shadow( 2px 2px 2px #000 );
+  -webkit-filter: drop-shadow( 2px 2px 2px #000 );
+  */
+}
+
+.GroupGroup > .Icon {
+  fill: transparent;
+  stroke-width: 0px;
+}
+
+.GroupComplex > .Icon {
+  fill: #b4b464;
+  fill-opacity: 0.1;
+  stroke: #808080;
+}
+
+.GroupNone > .Icon {
+  fill: #b4b464;
+  fill-opacity: 0.1;
+  stroke: #808080;
+}
+
+.GroupPathway > .Icon {
+  fill: #008000;
+  fill-opacity: 0.05;
+  stroke: #808080;
+}
+
+.CellularComponent > .Icon {
+  color: orange;
+  fill: pink;
+  fill-opacity: 0.05;
+  stroke: orange;
+}
+
+.Label > .Icon {
+  color: transparent;
+  fill: none;
+  fill-opacity: 0;
+  stroke: none;
+  /*filter: url(#Invert95);*/
+}
+.Label > .Text {
+  fill: #fefefe;
+  /*filter: url(#Invert95);*/
+}
+
+.DataNode > .Icon {
+  /* clip-path needed because rx & ry don't work in FF or Safari */
+  clip-path: url(#ClipPathRoundedRectangle);
+  rx: 15px;
+  ry: 15px;
+  stroke-width: 0px;
+}
+.DataNode > .Text {
+  font-weight: bold;
+}
+.DataNode:hover {
+  cursor: pointer;
+}
+
+.DataNode.GeneProduct > .Icon {
+  fill: #f4d03f;
+}
+.DataNode.GeneProduct .Text {
+  fill: #333;
+}
+
+.DataNode.Protein > .Icon {
+  fill: brown;
+}
+.DataNode.Protein > .Text {
+  fill: #fefefe;
+}
+
+.DataNode.Rna > .Icon {
+  fill: #9453a7;
+}
+.DataNode.Rna > .Text {
+  fill: #ecf0f1;
+}
+
+.DataNode.Pathway > .Icon {
+  filter: url(#WhiteToGreen);
+  /*
+  fill: #75C95C;
+  */
+  /* NOTE: Uncomment the line below to see an example
+   *      of adding a dropshadow to Pathway DataNodes: */
+  /*filter: 'drop-shadow( 2px 2px 2px #000 )'; */
+}
+.DataNode.Pathway > .Text {
+  filter: url(#Invert100);
+  /*fill: #1C2833;*/
+}
+
+.DataNode.Metabolite > .Icon {
+  fill: #0000ee;
+}
+.DataNode.Metabolite > .Text {
+  fill: #fefefe;
+}
+
+.DataNode > State {
+  filter: url(#WhiteTo33BFFF);
+}
+
+.Interaction {
+  filter: url(#Invert95);
+  stroke-width: 1.3;
+}
+
+.Stimulation {
+  filter: url(#BlackToGreen);
+}
+
+.Inhibition {
+  filter: url(#BlackToRed);
+}
+
+.Citation .Text {
+  fill: gray;
+  font-size: 10px;
+}`
 
 const themeFor = {
   plain: {
