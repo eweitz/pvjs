@@ -2,6 +2,7 @@
 .envrc
 .nixpkgs-version.json
 .idea
+.vscode
 node_modules
 tmp
 logs
